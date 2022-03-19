@@ -1,0 +1,146 @@
+#:import Window kivy.core.window.Window
+<Home>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: [1,1,1,1]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Widget:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: dp(18)
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: dp(68)
+        padding: [dp(14), dp(8)]
+        Text:
+            text: "Sunday, Mar 19"
+            font_size: app.fonts.size.h6
+            color: app.colors.grey
+            font_name: app.fonts.body
+            size_hint_y: None
+            height: dp(12)
+            valign: 'bottom'
+        BoxLayout:
+            spacing: dp(12)
+            Text:
+                text: 'Top Picks'
+                font_size: app.fonts.size.h1
+                color: app.colors.primary
+                font_name: app.fonts.heading
+            AnchorLayout:
+                size_hint_x: None
+                width: self.height
+                padding: dp(6)
+                IconButton:
+                    source: 'assets/icons/ic_menu.png'
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: dp(64)
+        padding: [dp(14), dp(4)]
+        orientation: 'vertical'
+        BoxLayout:
+            padding: dp(4)
+            canvas.before:
+                Color:
+                    rgba: app.colors.grey_light
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [self.height*.3]
+            SmoothTab:
+                text: 'Top'
+                state: 'down'
+            SmoothTab:
+                text: 'Outdoor'
+            SmoothTab:
+                text: 'Indoor'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [dp(14), dp(4)]
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll: [False, True]
+            size_hint_y: None
+            height: self.parent.height -dp(14)
+            bar_inactive_color: [0,0,0,0]
+            bar_active_color: [0,0,0,0]
+            GridLayout:
+                id: plants
+                cols: 1
+                padding: [dp(14), dp(14), dp(14), 0]
+                spacing: dp(14)
+                size_hint_y: None
+                height: self.minimum_height
+    
+<SmoothTab@ToggleButton>:
+    color: app.colors.primary
+    background_normal: ''
+    background_down: ''
+    background_color: [0,0,0,0]
+    group: 'tabs'
+    font_name: app.fonts.subheading
+    canvas.before:
+        Color:
+            rgba: app.colors.white if self.state == 'down' else [0,0,0,0]
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [self.height*.3]
+
+<Plant>:
+    size_hint_y: None
+    height: Window.height * .6
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: app.colors.white
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [root.radius]
+            source: 'assets/imgs/bg.png'
+    BoxLayout:
+        padding: [dp(14), dp(34), dp(14), dp(8)]
+        orientation: 'vertical'
+        size_hint_y: None
+        height: dp(108)
+        Text:
+            text: root.name
+            font_size: app.fonts.size.h1
+            color: app.colors.white
+            font_name: app.fonts.heading
+        Text:
+            text: root.station
+            font_size: app.fonts.size.h6
+            color: app.colors.secondary
+            font_name: app.fonts.body
+    RelativeLayout:
+        AnchorLayout:
+            id: anchor
+            anchor_y: 'bottom'
+            Widget:
+                size_hint_y: None
+                height: anchor.height*.9
+                canvas.before:
+                    Color:
+                        rgba: [1,1,1,1]
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        source: root.source
+        AnchorLayout:
+            anchor_x: 'right'
+            anchor_y: 'bottom'
+            RoundedButton:
+                text: '[b]$%s[/b]\n[size=12]from[/size]'%root.price
+                size_hint: [.3, .3]
+                font_size: app.fonts.size.h4
+                bcolor: app.colors.success
+                color: app.colors.white
+                radius: [root.radius, 0, root.radius, 0]
+        

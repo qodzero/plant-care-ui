@@ -1,0 +1,28 @@
+#:import Text widgets.labels.Text
+#:import IconButton widgets.buttons.IconButton
+#:import FlatButton widgets.buttons.FlatButton
+#:import RoundedButton widgets.buttons.RoundedButton
+
+#:import Home views.home.Home
+#:import PlantView views.plant.PlantView
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+
+<MainWindow>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: rgba('#ffffff')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ScreenManager:
+        id: scrn_mngr
+        transition: SwapTransition()
+        Screen:
+            name: 'scrn_home'
+            Home:
+                id: home
+        Screen:
+            name: 'scrn_plant'
+            PlantView:
+                id: plant

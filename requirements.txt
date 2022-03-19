@@ -1,0 +1,10 @@
+certifi==2021.10.8
+charset-normalizer==2.0.12
+docutils==0.18.1
+idna==3.3
+Kivy==2.1.0
+Kivy-Garden==0.1.4
+pkg_resources==0.0.0
+Pygments==2.11.2
+requests==2.27.1
+urllib3==1.26.9
